@@ -6,18 +6,27 @@ void clear()
   {
     for (int col = 0; col < NUM_COLS; col++)
     {
-      print_at('A', row, col);
+      print_at(' ', row, col);
     }
   }
 }
 
-void print_at(byte c, int row, int col)
+void print_at(const char c, int row, int col)
 {
-  byte *buf = (byte *)VIDEO_ADDRESS;
-  int offset = col + NUM_COLS * row;
+  char *buf = (char *)VIDEO_ADDRESS;
+  int offset = 2 * (col + NUM_COLS * row);
 
-  *(buf + (byte)offset) = c;
-  *(buf + (byte)offset + 1) = 0x0f;
-  *((byte *)0xb8002) = c;
-  *((byte *)0xb8003) = 0x0f;
+  buf[offset] = c;
+  buf[offset + 1] = 0x0f;
+}
+
+void printk(const char *str)
+{
+  const char *p = str;
+  int i = 0;
+  while (p[i])
+  {
+    print_at(p[i], 0, i);
+    i++;
+  }
 }

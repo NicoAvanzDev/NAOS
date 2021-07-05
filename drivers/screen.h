@@ -5,5 +5,5 @@
 typedef unsigned char byte;
 
 void printk(const char *str);
-void print_at(byte c, int row, int col);
+void print_at(const char c, int row, int col);
 void clear();

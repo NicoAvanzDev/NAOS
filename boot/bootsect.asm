@@ -28,7 +28,7 @@ load_kernel:
   call print_nl
 
   mov ah, 0
-  mov al, 0x02
+  mov al, 0x03
   int 0x10
 
   mov bx, KERNEL_OFFSET ; Read from disk and store in 0x1000
