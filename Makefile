@@ -1,40 +1,30 @@
-C_SOURCES = $(wildcard kernel/*.c drivers/*.c cpu/*.c libc/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h libc/*.h)
-# Nice syntax for file extension replacement
+C_SOURCES = $(wildcard drivers/*.c)
+HEADERS = $(wildcard drivers/*.h)
+
 OBJ = ${C_SOURCES:.c=.o} 
 
-# Change this if your cross-compiler is somewhere else
-CC = gcc
-GDB = gcc
-# -g: Use debugging symbols in gcc
-CFLAGS = -m32 -ffreestanding -Wall -Wextra -fno-pie
+GCC_FLAGS = -ffreestanding -Wall -Wextra -m32 -masm=intel
 
-# First rule is run by default
-os-image.bin: boot/bootsect.bin kernel.bin
-	cat $^ > os-image.bin
+all: naos.iso
+	cp build/naos.bin build/boot/naos.bin
 
-# '--oformat binary' deletes all symbols as a collateral, so we don't need
-# to 'strip' them manually on this case
-kernel.bin: boot/kernel_entry.o ${OBJ}
-	ld -m elf_i386 -n -o $@ -Ttext 0x1000 $^ --oformat binary
+build/bootsect.o: boot/bootsect.asm
+	nasm -f elf32 boot/bootsect.asm -o build/bootsect.o
 
-# Used for debugging purposes
-kernel.elf: boot/kernel_entry.o ${OBJ}
-	ld -n -o $@ -Ttext 0x1000 $^ 
+build/kernel.o: kernel/kernel.c
+	gcc -c kernel/kernel.c -o build/kernel.o ${GCC_FLAGS}
 
-run: os-image.bin	
+kernel.bin: build/kernel.o build/bootsect.o ${OBJ}
+	gcc -T boot/linker.ld -o build/naos.bin -ffreestanding -nostdlib $^ -m32 
+
+naos.iso: kernel.bin
+	grub-mkrescue -o naos.iso build
 
 # Generic rules for wildcards
 # To make an object, always compile from its .c
 %.o: %.c ${HEADERS}
-	${CC} ${CFLAGS} -c $< -o $@
-
-%.o: %.asm
-	nasm $< -f elf -o $@
-
-%.bin: %.asm
-	nasm $< -f bin -o $@
+	gcc ${CFLAGS} -c $< -o $@
 
 clean:
-	rm -rf *.bin *.dis *.o os-image.bin *.elf
-	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o cpu/*.o libc/*.o
+	rm -rf naos.iso
+	rm -rf drivers/*.o build/*.o build/*.bin
