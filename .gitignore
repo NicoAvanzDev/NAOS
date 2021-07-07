@@ -1,0 +1,4 @@
+naos.iso
+*.bin
+*.o
+.vscode
