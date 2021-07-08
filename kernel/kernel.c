@@ -2,7 +2,9 @@
 
 void kernel_main()
 {
-  init_vga();
-  *((unsigned char *)0xb8000) = 'A';
-  *((unsigned char *)0xb8001) = 0xf0;
+  init_screen();
+
+  kprint("NAOS (i386) --- VERSION: 0.1\n");
+  kprint("Welcome to NAOS operating system.\n");
+  kprint("Please feel free to edit the souce code made for educational purposes only!\n\n");
 }
