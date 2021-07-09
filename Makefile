@@ -1,9 +1,9 @@
-C_SOURCES = $(wildcard drivers/*.c)
-HEADERS = $(wildcard drivers/*.h)
+C_SOURCES = $(wildcard drivers/*.c cpu/*.c)
+HEADERS = $(wildcard drivers/*.h cpu/*.h)
 
 OBJ = ${C_SOURCES:.c=.o} 
 
-GCC_FLAGS = -ffreestanding -Wall -Wextra -m32 -masm=intel
+GCC_FLAGS = -ffreestanding -Wall -Wextra -m32
 
 all: naos.iso
 	cp build/naos.bin build/boot/naos.bin

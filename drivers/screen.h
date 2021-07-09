@@ -13,7 +13,7 @@ struct cursor
 } cursor;
 
 // Initialize screen related informations
-void init_screen();
+void screen_init();
 
 void kprint(const char *str);
 void kputc(char c);
