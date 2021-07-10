@@ -19,7 +19,7 @@ resb 16384
 stack_top:
 
 section .text
-%include "boot/gdt.asm"
+%include "boot/protected_mode.asm"
 global _start
 [extern kernel_main]
 [bits 32]
@@ -28,3 +28,6 @@ _start:
 end_load_gdt: ; Label used to perform long jump after lgdt
   call kernel_main  
   hlt
+
+section .data
+%include "boot/gdt.asm"
