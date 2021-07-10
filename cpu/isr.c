@@ -96,26 +96,11 @@ char *exception_messages[] = {
     "Coprocessor Fault",
     "Alignment Check",
     "Machine Check",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
-    "Reserved",
 };
 
 void isr_handler(registers r)
 {
-  kprint("received interrupt: ");
-  kprint("\n");
+  kprint("INTERRUPT: ");
   kprint(exception_messages[r.int_no]);
   kprint("\n");
 }
