@@ -1,7 +1,7 @@
 C_SOURCES = $(wildcard drivers/*.c cpu/*.c)
 HEADERS = $(wildcard drivers/*.h cpu/*.h)
 
-OBJ = ${C_SOURCES:.c=.o} 
+OBJ = ${C_SOURCES:.c=.o cpu/interrupts.o} 
 
 GCC_FLAGS = -ffreestanding -Wall -Wextra -m32
 
@@ -25,6 +25,9 @@ naos.iso: kernel.bin
 %.o: %.c ${HEADERS}
 	gcc ${CFLAGS} -c $< -o $@
 
+%.o: %.asm
+	nasm $< -f elf32 -o $@
+
 clean:
 	rm -rf naos.iso
-	rm -rf drivers/*.o build/*.o build/*.bin
+	rm -rf drivers/*.o build/*.o build/*.bin cpu/*.o
