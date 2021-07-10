@@ -20,6 +20,7 @@ stack_top:
 
 section .text
 %include "boot/protected_mode.asm"
+
 global _start
 [extern kernel_main]
 [bits 32]

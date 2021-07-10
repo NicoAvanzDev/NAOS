@@ -27,8 +27,7 @@ isr_common_stub:
 	sti
 	iret ; pops 5 things at once: CS, EIP, EFLAGS, SS, and ESP
 
-; Common IRQ code. Identical to ISR code except for the 'call' 
-; and the 'pop ebx'
+; Common IRQ code.
 irq_common_stub:
     pusha 
     mov ax, ds
