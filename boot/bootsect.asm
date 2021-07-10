@@ -1,10 +1,10 @@
 ; Declare constants for the multiboot header. (first 8k)
 section .multiboot
 header_start:
-	dd 0xe85250d6 ; 'magic number' lets bootloader find the header
-	dd 0  ; this is the Multiboot 'flag' field
+  dd 0xe85250d6 ; 'magic number' lets bootloader find the header
+  dd 0  ; this is the Multiboot 'flag' field
   dd header_end - header_start ; header length
-	dd 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))  ; checksum of above, to prove we are multiboot
+  dd 0x100000000 - (0xe85250d6 + 0 + (header_end - header_start))  ; checksum of above, to prove we are multiboot
 
  ; end tag
   dw 0
@@ -76,3 +76,4 @@ gdt_descriptor:
 ; define some constants for later use
 CODE_SEG equ gdt_code - gdt_start
 DATA_SEG equ gdt_data - gdt_start
+
