@@ -78,12 +78,12 @@ typedef struct
   uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax; /* Pushed by pusha. */
   uint32_t int_no, err_code;                       /* Interrupt number and error code (if applicable) */
   uint32_t eip, cs, eflags, useresp, ss;           /* Pushed by the processor automatically */
-} registers;
+} registers_t;
 
-typedef void (*isr_t)(registers);
+typedef void (*isr_t)(registers_t *);
 
 void init_isr();
-void isr_handler(registers r);
+void isr_handler(registers_t *r);
 
 void register_interrupt_handler(uint8_t n, isr_t handler);
 

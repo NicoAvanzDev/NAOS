@@ -25,10 +25,7 @@ global _start
 [extern kernel_main]
 [bits 32]
 _start:  
-  call load_gdt 
-end_load_gdt: ; Label used to perform long jump after lgdt
+  call begin_pm 
+load_kernel: ; Label used to perform long jump after lgdt
   call kernel_main  
-  hlt
-
-section .data
-%include "boot/gdt.asm"
+  jmp $

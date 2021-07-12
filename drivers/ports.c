@@ -1,9 +1,11 @@
+#include "ports.h"
+
 /**
  * Read a byte from the specified port
  */
-unsigned char port_byte_in(unsigned short port)
+uint8_t port_byte_in(uint16_t port)
 {
-  unsigned char result;
+  uint8_t result;
 
   asm("in %%dx, %%al"
       : "=a"(result)
@@ -11,25 +13,25 @@ unsigned char port_byte_in(unsigned short port)
   return result;
 }
 
-void port_byte_out(unsigned short port, unsigned char data)
+void port_byte_out(uint16_t port, uint8_t data)
 {
-  asm("out %%al, %%dx"
-      :
-      : "a"(data), "d"(port));
+  asm volatile("out %%al, %%dx"
+               :
+               : "a"(data), "d"(port));
 }
 
-unsigned short port_word_in(unsigned short port)
+uint16_t port_word_in(uint16_t port)
 {
-  unsigned short result;
+  uint16_t result;
   asm("in %%dx, %%ax"
       : "=a"(result)
       : "d"(port));
   return result;
 }
 
-void port_word_out(unsigned short port, unsigned short data)
+void port_word_out(uint16_t port, uint16_t data)
 {
-  asm("out %%ax, %%dx"
-      :
-      : "a"(data), "d"(port));
+  asm volatile("out %%ax, %%dx"
+               :
+               : "a"(data), "d"(port));
 }

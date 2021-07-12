@@ -2,6 +2,9 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include "ports.h"
+#include "../libs/types.h"
+
 #define VIDEO_ADDRESS 0xB8000
 
 #define NUM_COLS 80
@@ -17,6 +20,7 @@ void init_screen();
 
 void kprint(const char *str);
 void kputc(char c);
+void kput_backspace();
 void kclear();
 
 #endif
