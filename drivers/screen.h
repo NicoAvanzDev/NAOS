@@ -4,6 +4,7 @@
 
 #include "ports.h"
 #include "../libc/types.h"
+#include <stdarg.h>
 
 #define VIDEO_ADDRESS 0xB8000
 
@@ -18,8 +19,7 @@ struct cursor
 // Initialize screen related informations
 void init_screen();
 
-void kprint(const char *str);
-void kputc(char c);
+void kprintf(const char *str, ...);
 void kput_backspace();
 void kclear();
 

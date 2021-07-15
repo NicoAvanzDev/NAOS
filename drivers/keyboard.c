@@ -29,7 +29,7 @@ static void keyboard_callback(registers_t *regs)
   }
   else if (scancode == ENTER)
   {
-    kprint("\n");
+    kprintf("\n");
     eoinput = 1;
     return;
   }
@@ -38,7 +38,7 @@ static void keyboard_callback(registers_t *regs)
   append_buffer(ascii);
 
   const char output[2] = {ascii, '\0'};
-  kprint(output);
+  kprintf(output);
 }
 
 void init_keyboard()
