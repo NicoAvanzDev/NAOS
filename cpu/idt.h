@@ -2,7 +2,7 @@
 #ifndef IDT_H
 #define IDT_H
 
-#include "../libs/types.h"
+#include "../libc/types.h"
 
 #define IDT_ENTRIES 256
 

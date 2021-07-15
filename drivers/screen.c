@@ -32,6 +32,7 @@ void kputc(char c)
   {
     cursor.row++;
     cursor.col = 0;
+    update_cursor();
     return;
   }
 

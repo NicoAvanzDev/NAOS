@@ -2,7 +2,6 @@
 
 static void timer_callback(registers_t *regs)
 {
-  kprint(". ");
 }
 
 void init_timer(uint32_t freq)

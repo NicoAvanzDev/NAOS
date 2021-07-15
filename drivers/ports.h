@@ -2,7 +2,7 @@
 #ifndef PORTS_H
 #define PORTS_H
 
-#include "../libs/types.h"
+#include "../libc/types.h"
 
 byte_t port_byte_in(uint16_t port);
 void port_byte_out(uint16_t port, byte_t data);

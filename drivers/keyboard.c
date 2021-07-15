@@ -1,5 +1,18 @@
 #include "keyboard.h"
 
+static char *buffer;
+
+static int eoinput = 0;
+
+const char sc_ascii[] = {'?', '?', '1', '2', '3', '4', '5', '6',
+                         '7', '8', '9', '0', '-', '=', '?', '?', 'Q', 'W', 'E', 'R', 'T', 'Y',
+                         'U', 'I', 'O', 'P', '[', ']', '?', '?', 'A', 'S', 'D', 'F', 'G',
+                         'H', 'J', 'K', 'L', ';', '\'', '`', '?', '\\', 'Z', 'X', 'C', 'V',
+                         'B', 'N', 'M', ',', '.', '/', '?', '?', '?', ' '};
+
+void append_buffer(char c);
+void backspace_buffer();
+
 static void keyboard_callback(registers_t *regs)
 {
   // Read PIC scancode output
@@ -10,13 +23,19 @@ static void keyboard_callback(registers_t *regs)
 
   if (scancode == BACKSPACE)
   {
+    backspace_buffer();
     kput_backspace();
     return;
   }
-  if (scancode == ENTER)
+  else if (scancode == ENTER)
+  {
     kprint("\n");
+    eoinput = 1;
+    return;
+  }
 
   char ascii = sc_ascii[(int)scancode];
+  append_buffer(ascii);
 
   const char output[2] = {ascii, '\0'};
   kprint(output);
@@ -25,4 +44,48 @@ static void keyboard_callback(registers_t *regs)
 void init_keyboard()
 {
   register_interrupt_handler(IRQ1, keyboard_callback);
+  buffer[0] = '\0';
+}
+
+void append_buffer(char c)
+{
+  int i = 0;
+  while (buffer[i] != '\0')
+  {
+    i++;
+  }
+  if (i == BUFFER_SIZE)
+    i = 0;
+  buffer[i] = c;
+  buffer[i + 1] = '\0';
+}
+
+void backspace_buffer()
+{
+  int i = 0;
+  while (buffer[i] != '\0')
+  {
+    i++;
+  }
+  if (i <= 0)
+    i = 0;
+  buffer[i - 1] = '\0';
+}
+
+char *get_buffer()
+{
+  return buffer;
+}
+
+void clean_buffer()
+{
+  buffer[0] = '\0';
+}
+
+void wait_eoinput()
+{
+  while (eoinput != 1)
+  {
+  }
+  eoinput = 0;
 }

@@ -3,7 +3,7 @@
 #define SCREEN_H
 
 #include "ports.h"
-#include "../libs/types.h"
+#include "../libc/types.h"
 
 #define VIDEO_ADDRESS 0xB8000
 

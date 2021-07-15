@@ -5,7 +5,7 @@
 #include "isr.h"
 #include "../drivers/ports.h"
 #include "../drivers/screen.h"
-#include "../libs/types.h"
+#include "../libc/types.h"
 
 void init_timer(uint32_t freq);
 

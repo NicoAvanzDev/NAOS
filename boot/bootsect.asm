@@ -20,12 +20,14 @@ stack_top:
 
 section .text
 %include "boot/protected_mode.asm"
+%include "boot/paging.asm"
 
 global _start
 [extern kernel_main]
 [bits 32]
-_start:  
-  call begin_pm 
+_start:
+  call begin_pm
 load_kernel: ; Label used to perform long jump after lgdt
+  call enable_paging
   call kernel_main  
   jmp $

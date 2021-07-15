@@ -1,1 +1,1 @@
-qemu-system-i386 -cdrom naos.iso
+qemu-system-i386 -cdrom naos.iso -m 2G

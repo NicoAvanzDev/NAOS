@@ -1,5 +1,5 @@
-C_SOURCES = $(wildcard drivers/*.c cpu/*.c)
-HEADERS = $(wildcard drivers/*.h cpu/*.h libs/*.h)
+C_SOURCES = $(wildcard drivers/*.c cpu/*.c libc/*.c)
+HEADERS = $(wildcard drivers/*.h cpu/*.h libc/*.h)
 
 OBJ = ${C_SOURCES:.c=.o cpu/interrupts.o} 
 
@@ -30,4 +30,4 @@ naos.iso: kernel.bin
 
 clean:
 	rm -rf naos.iso
-	rm -rf drivers/*.o build/*.o build/*.bin cpu/*.o
+	rm -rf drivers/*.o build/*.o build/*.bin cpu/*.o libs/*.o
