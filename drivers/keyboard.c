@@ -44,7 +44,8 @@ static void keyboard_callback(registers_t *regs)
 void init_keyboard()
 {
   register_interrupt_handler(IRQ1, keyboard_callback);
-  buffer = kmalloc(BUFFER_SIZE);
+
+  buffer = (char *)kmalloc(sizeof(char) * BUFFER_SIZE);
   *buffer = '\0';
 
   eoinput = 0;
@@ -82,7 +83,7 @@ char *get_buffer()
 
 void clean_buffer()
 {
-  buffer[0] = '\0';
+  *buffer = '\0';
 }
 
 void wait_eoinput()

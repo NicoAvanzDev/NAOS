@@ -15,7 +15,7 @@
 
 void init_keyboard();
 char *get_buffer();
-void clean_buffer();
+void clear_buffer();
 void wait_eoinput();
 
 #endif
