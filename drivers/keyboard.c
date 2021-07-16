@@ -81,7 +81,7 @@ char *get_buffer()
   return buffer;
 }
 
-void clean_buffer()
+void clear_buffer()
 {
   *buffer = '\0';
 }
