@@ -28,6 +28,6 @@ global _start
 _start:
   call begin_pm
 load_kernel: ; Label used to perform long jump after lgdt
-  ; call enable_paging
+  call enable_paging
   call kernel_main  
   jmp $

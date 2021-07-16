@@ -2,7 +2,7 @@
 
 static char *buffer;
 
-static int eoinput = 0;
+static int eoinput;
 
 const char sc_ascii[] = {'?', '?', '1', '2', '3', '4', '5', '6',
                          '7', '8', '9', '0', '-', '=', '?', '?', 'Q', 'W', 'E', 'R', 'T', 'Y',
@@ -29,8 +29,8 @@ static void keyboard_callback(registers_t *regs)
   }
   else if (scancode == ENTER)
   {
-    kprintf("\n");
     eoinput = 1;
+    kprintf("\n");
     return;
   }
 
@@ -44,7 +44,10 @@ static void keyboard_callback(registers_t *regs)
 void init_keyboard()
 {
   register_interrupt_handler(IRQ1, keyboard_callback);
-  buffer[0] = '\0';
+  buffer = kmalloc(BUFFER_SIZE);
+  *buffer = '\0';
+
+  eoinput = 0;
 }
 
 void append_buffer(char c)

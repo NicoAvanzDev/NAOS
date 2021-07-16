@@ -19,9 +19,7 @@ void kernel_main()
   kprintf("Please feel free to edit the souce code made for educational purposes only!\n\n");
 
   kprintf("\n> ");
-  char *str = gets();
-  kprintf("Read: ");
-  kprintf(str);
+  kprintf(gets());
 }
 
 void init()

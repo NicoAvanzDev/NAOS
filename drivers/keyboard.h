@@ -6,6 +6,7 @@
 #include "screen.h"
 #include "../cpu/isr.h"
 #include "../libc/types.h"
+#include "../memory/mem.h"
 
 #define BACKSPACE 0x0e
 #define ENTER 0x1c

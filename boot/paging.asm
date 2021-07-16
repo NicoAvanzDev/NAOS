@@ -2,15 +2,12 @@ section .bss
 align 4096
 page_level_4:
   resb 4096
-end_page_level_4:
 
 page_level_3:
   resb 4096
-end_page_level_3:
 
 page_level_2:
   resb 4096
-end_page_level_2:
 
 
 section .text
