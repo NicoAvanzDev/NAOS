@@ -30,4 +30,4 @@ naos.iso: kernel.bin
 
 clean:
 	rm -rf naos.iso
-	rm -rf drivers/*.o build/*.o build/*.bin cpu/*.o libs/*.o
+	rm -rf ${OBJ}
